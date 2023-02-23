@@ -1,8 +1,4 @@
-x = input("masukk nama anda : ")
-y = input('masukkan usia anda: ')
+nama = input('Masukkan nama anda: ')
 
-
-name = x
-umur = y
-
-print(name, type(umur))
+print('Halo,', nama, '.. selamat datang!')
+print('Ini adalah type data dari variable nama : ', type(nama))
