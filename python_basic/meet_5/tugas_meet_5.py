@@ -1,11 +1,3 @@
-"""
-1. input
-2. percabangan
-3. looping
-4. data type
-
-"""
-
 '''Soal 1: Comparison Operator
 
 - Berikan contoh comparison dari tipe data string
@@ -14,6 +6,13 @@
 '''
 
 #kerjakan disini
+x = "ABC"
+y = 'abc'
+
+if x == y:
+    print(True)
+else:
+    print(False)
 
 
 

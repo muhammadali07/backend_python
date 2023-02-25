@@ -25,8 +25,8 @@ if int(total_belanja) > 100000:
     bayar = int(total_belanja) - diskon
 
 
-# cetak struk
-print("Total yang harus dibayar: Rp %s" % bayar)
-print(f'Total potongan Diskon : {diskon}')
-print("Terima kasih sudah berbelanja")
-print("Datang lagi yaa...")
+    # cetak struk
+    print("Total yang harus dibayar: Rp %s" % bayar)
+    print(f'Total potongan Diskon : {diskon}')
+    print("Terima kasih sudah berbelanja")
+    print("Datang lagi yaa...")
