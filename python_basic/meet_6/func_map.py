@@ -10,8 +10,8 @@ print(hasil)
 
 # menggunakan lambda
 
-data = [1,2,3,4]
+# data = [1,2,3,4]
 
-hasil = list(map(lambda x:x*3,data))
+# hasil = list(map(lambda x:x*3,data))
 
-print(hasil)
+# print(hasil)

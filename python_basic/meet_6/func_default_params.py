@@ -1,4 +1,4 @@
-def fungsi_03 (nilai1 = 1, nilai2 = 2):
+def fungsi_03 (nliai1 = 1, nilai2 = 2):
   hasil = nilai1 + nilai2
   return hasil
 

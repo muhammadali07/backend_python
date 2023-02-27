@@ -3,6 +3,9 @@ def nama_function(parameter):
     kode/pernyataan fungsi
 '''
 
+def hello_word():
+    print("hello world")
+
 # fungsi tanpa return
 def helloworld():
     print("Hello World")
@@ -20,3 +23,5 @@ def pangkat(nilai):
 
 nilai_2 = pangkat(a)*2
 print(nilai_2)
+
+hello_word()
