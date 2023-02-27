@@ -8,7 +8,7 @@ class mobil:
 mobil1 = mobil('Sedan', 'Merah')
 mobil2 = mobil('SUV', 'Hitam')
 
-print(mobil1.benda)
+print(mobil1.jenis)
 print(mobil2.benda)
 
 #Mobil
