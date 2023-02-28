@@ -53,7 +53,9 @@ def mainLagi(main):
 def goFight():
     # nama_lawan = input("Siapa nama monster lawanmu ? ")
     monster_lawan = {"name": "", "power":1000, "strenght": 500}
-
+    nama_lawan = input("Siapa nama monster lawanmu ? ")
+    monster_lawan.update({"name": nama_lawan})
+    
     if monster_lawan['name'] in (None, '', []):
         nama_lawan = input("Siapa nama monster lawanmu ? ")
         monster_lawan.update({"name": nama_lawan})
