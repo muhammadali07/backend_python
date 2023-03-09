@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "c0c6f75f-410a-4fb6-a7bb-0957e6d52e77",
+		"name": "Bootcamp Ihsan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10726111"
+	},
+	"item": [
+		{
+			"name": "be_bms",
+			"item": [
+				{
+					"name": "Flask",
+					"item": [
+						{
+							"name": "native_query_parameter",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/nama/ihsan_solusi?age=24&from=indonesia",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"nama",
+										"ihsan_solusi"
+									],
+									"query": [
+										{
+											"key": "age",
+											"value": "24"
+										},
+										{
+											"key": "from",
+											"value": "indonesia"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "native_json_body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nama\" : \"Muh Ihsan Solusi Informatika\",\n    \"usia\" : 24,\n    \"asal\" : \"Indonesia\" \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/biodata/",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"biodata",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "native_return_jsonify",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nama\" : \"Muh Ali Bakhtiar\",\n    \"usia\" : 24,\n    \"asal\" : \"Indonesia\" \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/biografi/",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"biografi",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "swagger_get_users_by_id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/user/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
