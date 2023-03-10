@@ -1,10 +1,11 @@
+import json
 from datetime import datetime
 from config import engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.future import select
 from sqlalchemy import and_, or_, delete, desc, asc
 from models import TrainerModels, TrainerDetailsModels
-from utils import ResponseOutCustom
+from utils import ResponseOutCustom, row2dict
 
 Session = sessionmaker(engine)
 session = Session()
@@ -21,25 +22,25 @@ def create_data(data):
         session.add(new_data)
         session.commit()
         session.close()
-        return ResponseOutCustom(message_id="00", status="Success", data=[data])
+        return ResponseOutCustom(message_id="00", status="Success", data=data)
     except Exception as e:
         return ResponseOutCustom(message_id="03", status=f'{str(e)}', data=[])
     
 
 def create_trainer_detail(data):
     new_data = TrainerDetailsModels(
-        trainer_nama_lengkap=['trainer_nama'],
-        trainer_gelar=['trainer_gelar'],
-        trainer_alumni_univ=['trainer_alumni_univ'],
-        trainer_konsentrasi=['trainer_konsentrasi'],
-        trainer_tahun_lulus=['trainer_tahun_lulus'],
+        trainer_nama_lengkap=data['trainer_nama_lengkap'],
+        trainer_gelar=data['trainer_gelar'],
+        trainer_alumni_univ=data['trainer_alumni_univ'],
+        trainer_konsentrasi=data['trainer_konsentrasi'],
+        trainer_tahun_lulus=data['trainer_tahun_lulus'],
         create_date = datetime.now()
     )
     try:
         session.add(new_data)
         session.commit()
         session.close()
-        return ResponseOutCustom(message_id="00", status="Success", data=[data])
+        return ResponseOutCustom(message_id="00", status="Success", data=data)
     except Exception as e:
         return ResponseOutCustom(message_id="03", status=f'{e}', data=[])
 
@@ -61,8 +62,20 @@ def search(keyword:str):
         query_stmt = (
             select(tb_trainer).filter(*(terms)).order_by(asc(tb_trainer.create_date))
         )
+        proxy_rows = session.execute(query_stmt).first()
+        return json.dumps(proxy_rows.__dict__)
+        # return ResponseOutCustom(message_id="00", status="Success", data=data)
+    except Exception as e:
+        return ResponseOutCustom(message_id="03", status=f'{e}', data=[])
+
+def get_list_data():
+    try:
+        tb_trainer = TrainerModels
+        query_stmt = (
+            select(tb_trainer).order_by(asc(tb_trainer.create_date))
+        )
         proxy_rows = session.execute(query_stmt)
-        result = proxy_rows.all()
+        result = proxy_rows.fetchall()
         data = []
         for i in result:
             dt = {
@@ -73,5 +86,3 @@ def search(keyword:str):
         return ResponseOutCustom(message_id="00", status="Success", data=[data])
     except Exception as e:
         return ResponseOutCustom(message_id="03", status=f'{e}', data=[])
-
-        
