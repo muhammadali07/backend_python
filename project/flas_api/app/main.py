@@ -35,6 +35,24 @@ def get_list_data():
      )
      return jsonify(result)
 
+@app.route('/get_list_data_id/<id>', methods=['GET'])
+def get_list_data_id(id):
+     result = trainer_crud.get_list_data_id(id)
+     return jsonify(result)
+
+@app.route('/update-data-by-id/<id>', methods=['PUT'])
+def update_data_by_id(id):
+     data = request.get_json()
+     name_trainer = data['name_trainer']
+     result = trainer_crud.update_data_by_id(id, name_trainer=name_trainer)
+     return jsonify(result)
+
+
+@app.route('/delete-data-by-id/<id>', methods=['DELETE'])
+def delete_data_by_id(id):
+     result = trainer_crud.delete_data_by_id(id)
+     return jsonify(result)
+
 
 
 if __name__ == "__main__":

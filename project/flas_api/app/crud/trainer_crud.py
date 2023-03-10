@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import jsonify
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.future import select
-from sqlalchemy import and_, or_, delete, desc, asc
+from sqlalchemy import and_, or_, delete, desc, asc, update
 from models import TrainerModels, TrainerDetailsModels
 
 from utils import engine, as_dict, ResponseOutCustom
@@ -81,24 +81,59 @@ def get_list_data(keyword, limit, page):
     except Exception as e:
         return ResponseOutCustom(message="03", status=f"{e}", data=[])
 
-# def get_list_data():
-#     try:
-#         tb_trainer = TrainerModels
-#         query_stmt = (
-#             select(tb_trainer).order_by(asc(tb_trainer.create_date))
-#         )
-#         proxy_rows = session.execute(query_stmt)
-#         result = proxy_rows.fetchall()
-#         data = []
-#         for i in result:
-#             dt = {
-#                 "trainer_nama":i[0]
-#             }
-#             data.append(dt)
-#         session.close()
-#         return ResponseOutCustom(message_id="00", status="Success", data=[data])
-#     except Exception as e:
-#         return ResponseOutCustom(message_id="03", status=f'{e}', data=[])
+
+def get_list_data_id(id):
+    try:
+        tbtrainer = TrainerModels
+        query_stmt = (
+            select(tbtrainer).where(tbtrainer.id==int(id))
+        )
+        proxy_rows = session.execute(query_stmt).scalars().all()
+        data = as_dict(proxy_rows)
+        if data not in (None, [], ''):
+            return ResponseOutCustom(message="00", status="Success", data=data[0])
+        else:
+            return ResponseOutCustom(message="02", status="Data not found", data=data)
+    except Exception as e:
+        return ResponseOutCustom(message="03", status=f"{e}", data=[])
+
+def update_data_by_id(id, name_trainer):
+    try:
+        tbtrainer = TrainerModels
+        if int(id) in (None, ''):
+            return ResponseOutCustom(message="01", status=f"Data not provided", data=[])
+        
+        query_stmt = (
+            update(tbtrainer).where(tbtrainer.id==int(id)).values(
+                trainer_nama = name_trainer
+            )
+        )
+        proxy_rows = session.execute(query_stmt)
+        session.commit()
+
+        
+        return ResponseOutCustom(message="00", status="Success", data=[])
+    except Exception as e:
+        return ResponseOutCustom(message="03", status=f"{e}", data=[])
+
+
+def delete_data_by_id(id):
+    try:
+        tbtrainer = TrainerModels
+        if int(id) in (None, ''):
+            return ResponseOutCustom(message="01", status=f"Data not provided", data=[])
+        
+        query_stmt = (
+            delete(tbtrainer).where(tbtrainer.id==int(id))
+        )
+        proxy_rows = session.execute(query_stmt)
+        session.commit()
+
+        
+        return ResponseOutCustom(message="00", status="Success", data=[])
+    except Exception as e:
+        return ResponseOutCustom(message="03", status=f"{e}", data=[])
+
 
 def validation_data_trainer(data):
     query_stmt = select(TrainerModels).where(TrainerModels.trainer_nama == str(data))
