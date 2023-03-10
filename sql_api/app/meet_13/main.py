@@ -2,7 +2,7 @@ from sqlalchemy.orm import sessionmaker
 
 from models import Base
 from config import connection_core
-from crud import core_crud, trainer_crud
+from crud import trainer_crud
 
 def create_basemodel():
     Base.metadata.create_all(connection_core())
@@ -14,7 +14,7 @@ while(True):
     print("=== Belajar SQL Alchemy CRUD ===")
     print("Creating table from Base...")
     create_basemodel()
-    menu = input("pilih yang mana \n 1. Create Data \n 2. Get Data List \n 3. Update Data \n 4. Delete Data \n Jawaban :  ")
+    menu = input("pilih yang mana \n 1. Create Data \n 2. Get Data List From Keyword \n 3. Update Data \n 4. Delete Data \n Jawaban :  ")
 
     if int(menu) == 1:
         # result = core_crud.create_data()
@@ -32,16 +32,16 @@ while(True):
         )
         print(result)
     elif int(menu) == 2:
-        result = core_crud.get_list_student()
+        result = trainer_crud.search('Ali')
         print(result)
-    elif int(menu) == 3:
-        result = core_crud.update_data()
-        print(result)
-    elif int(menu) == 4:
-        result = core_crud.delete_data()
-        print(result)
-    elif int(menu) == 0:
-        create_basemodel()
+    # elif int(menu) == 3:
+    #     result = core_crud.update_data()
+    #     print(result)
+    # elif int(menu) == 4:
+    #     result = core_crud.delete_data()
+    #     print(result)
+    # elif int(menu) == 0:
+    #     create_basemodel()
     else:
         if int(menu) > 4:
             break

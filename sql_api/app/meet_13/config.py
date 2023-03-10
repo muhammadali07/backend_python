@@ -17,5 +17,5 @@ def connection_core():
 
     return engine
 
-# SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
-# engine = create_engine(SQLALCHEMY_DATABASE_URL)
+SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
