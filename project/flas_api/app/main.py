@@ -10,8 +10,10 @@ from utils import migrate_basemodel
 from crud import trainer_crud
 
 app = Flask(__name__)
+CORS(app=app)
 
 @app.route("/") 
+@cross_origin
 def main():
      return "Welcome Ihsan API!"
 
