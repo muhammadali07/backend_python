@@ -108,7 +108,7 @@ def update_data_by_id(id, name_trainer):
                 trainer_nama = name_trainer
             )
         )
-        proxy_rows = session.execute(query_stmt)
+        session.execute(query_stmt)
         session.commit()
 
         
@@ -126,7 +126,7 @@ def delete_data_by_id(id):
         query_stmt = (
             delete(tbtrainer).where(tbtrainer.id==int(id))
         )
-        proxy_rows = session.execute(query_stmt)
+        session.execute(query_stmt)
         session.commit()
 
         
@@ -134,6 +134,27 @@ def delete_data_by_id(id):
     except Exception as e:
         return ResponseOutCustom(message="03", status=f"{e}", data=[])
 
+def update_with_path(id, trainer_kelas):
+    try:
+        tbtrainer = TrainerModels
+        if int(id) in (None, ''):
+            return ResponseOutCustom(message="01", status=f"Data not provided", data=[])
+        
+        query_stmt = (
+            update(tbtrainer).where(tbtrainer.id==int(id)).values(
+                trainer_kelas = trainer_kelas
+            )
+        )
+        session.execute(query_stmt)
+        session.commit()
+
+        get_update_data = get_list_data_id(1)
+        print(get_update_data)
+
+        return ResponseOutCustom(message="00", status="Success", data=get_update_data['data'])
+
+    except Exception as e:
+        return ResponseOutCustom(message="03", status=f'{e}', data=[])
 
 def validation_data_trainer(data):
     query_stmt = select(TrainerModels).where(TrainerModels.trainer_nama == str(data))
@@ -141,5 +162,5 @@ def validation_data_trainer(data):
     if proxy_row is None:
         return False
     else:
-        data = as_dict(proxy_row)
+        data = as_dict([proxy_row])
         return True

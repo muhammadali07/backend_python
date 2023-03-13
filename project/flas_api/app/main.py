@@ -53,6 +53,15 @@ def delete_data_by_id(id):
      result = trainer_crud.delete_data_by_id(id)
      return jsonify(result)
 
+@app.route('/update_data_with_patch_id/<id>', methods=['PATCH'])
+def update_with_path(id):
+     data = request.get_json()
+     trainer_kelas = data['trainer_kelas']
+     result = trainer_crud.update_with_path(
+          id=id,
+          trainer_kelas=trainer_kelas
+     )
+     return jsonify(result)
 
 
 if __name__ == "__main__":
