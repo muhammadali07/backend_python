@@ -31,25 +31,7 @@ def create_data(data):
         session.close()
         return ResponseOutCustom(message="00", status="Berhasil", data=data)
     except Exception as e:
-        return "Error"
-    
-
-# def create_trainer_detail(data):
-#     new_data = TrainerDetailsModels(
-#         trainer_nama_lengkap=data['trainer_nama_lengkap'],
-#         trainer_gelar=data['trainer_gelar'],
-#         trainer_alumni_univ=data['trainer_alumni_univ'],
-#         trainer_konsentrasi=data['trainer_konsentrasi'],
-#         trainer_tahun_lulus=data['trainer_tahun_lulus'],
-#         create_date = datetime.now()
-#     )
-#     try:
-#         session.add(new_data)
-#         session.commit()
-#         session.close()
-#         return ResponseOutCustom(message_id="00", status="Success", data=data)
-#     except Exception as e:
-#         return ResponseOutCustom(message_id="03", status=f'{e}', data=[])
+        return ResponseOutCustom(message="03", status=f'{e}', data=[])
 
 def get_list_data(keyword, limit, page):
     try:
