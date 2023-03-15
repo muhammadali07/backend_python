@@ -1,4 +1,4 @@
-async def ResponseOutCustom(message, status, data):
+def ResponseOutCustom(message, status, data):
     out_rsp = {
         "message_id" : message,
         "status" : status,

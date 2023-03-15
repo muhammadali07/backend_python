@@ -9,6 +9,6 @@ class AccountUser(BaseModel):
     role: Optional[str] = 'admin'
     divisi: Optional[str] = 'engineering'
 
-class Login(BaseModel):
+class AccountLogin(BaseModel):
     email: Optional[str] = 'muhalibakhtiar@gmail.com'
     password: Optional[str]= 'ali12344'
