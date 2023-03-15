@@ -14,7 +14,7 @@ app = Flask(__name__)
 CORS(app=app)
 
 @app.route("/") 
-@cross_origin
+# @cross_origin
 def main():
      return "Welcome Ihsan API!"
 
