@@ -55,7 +55,7 @@ async def login(data, db_session:AsyncSession):
                     "email": result.email,
                     "divisi": result.divisi,
                     "role": result.role,
-                    "access_date": datetime.now()
+                    "access_date": str(datetime.now())
                 }
                 _token = create_access_token(data=dt, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
                 return ResponseOutCustom(message="00", status="Login Success", data= {"token_bearer": _token})
