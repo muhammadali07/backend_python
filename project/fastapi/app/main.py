@@ -15,6 +15,9 @@ app.include_router(api_router, prefix="/api/v1")
 async def startup():
     async with engine.begin() as conn:
         print("Startup Migration App ...")
+        # drop table
+        await conn.run_sync(Base.metadata.drop_all)
+        
         await conn.run_sync(Base.metadata.create_all)
         print("Migrastion Finished ...")
     

@@ -49,17 +49,18 @@ async def login(data, db_session:AsyncSession):
             )
             proxy_row = await session.execute(query_stmt)
             result = proxy_row.scalars().first()
-            dt = {
-                "username": result.username,
-                "email": result.email,
-                "divisi": result.divisi,
-                "role": result.role
-            }
             if result and result.password == data.password:
+                dt = {
+                    "username": result.username,
+                    "email": result.email,
+                    "divisi": result.divisi,
+                    "role": result.role,
+                    "access_date": datetime.now()
+                }
                 _token = create_access_token(data=dt, expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
                 return ResponseOutCustom(message="00", status="Login Success", data= {"token_bearer": _token})
             else:
-                return ResponseOutCustom(message="00", status="Login Failed", data= [])
+                return ResponseOutCustom(message="00", status=f"Login Failed, email {data.email} does not exist", data= [])
         except Exception as e:
             out_resp = ResponseOutCustom(message="03",status=f"{e}", data=[])
             return out_resp
