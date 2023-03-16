@@ -1,11 +1,9 @@
 import jwt
-
 from fastapi import Depends, HTTPException # type: ignore
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials # type: ignore
 from jwt import PyJWTError, decode
 from datetime import datetime, timedelta
 from typing import Optional
-from jwt import PyJWTError, decode
 
 SECRET_KEY = "secret_key"  # ganti dengan secret key yang sesuai
 ALGORITHM = "HS256"
