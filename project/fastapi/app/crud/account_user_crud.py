@@ -94,3 +94,19 @@ async def get_list_user(keyword:str, limit:int, page:int, db_session:AsyncSessio
         except Exception as e:
             out_resp = ResponseOutCustom(message="03",status=f"{e}", data=[])
             return out_resp
+        
+
+async def get_user_by_id(id:int, db_session:AsyncSession):
+    async with db_session as session:
+        try:
+            tbUser = AccountUserModels
+            query_stmt = select(tbUser).filter(tbUser.id == int(id))
+            proxy_row = await session.execute(query_stmt)
+            result = proxy_row.scalars().first()
+            
+            status = "Success" if result is not None else "Data not found"
+            out_resp =  ResponseOutCustom(message="00", status=status, data= result)
+            return out_resp
+        except Exception as e:
+            out_resp = ResponseOutCustom(message="03",status=f"{e}", data=[])
+            return out_resp

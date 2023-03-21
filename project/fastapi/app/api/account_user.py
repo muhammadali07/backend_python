@@ -47,3 +47,17 @@ async def get_list_user(
     return out_response
 
 
+@root.get("/get-user-by-id", 
+          summary="Get User By ID",
+          )
+async def get_user_by_id(
+    id: str = '',
+    db_session: AsyncSession = Depends(get_async_session),
+    # user_info: dict = Depends(verify_token)
+):
+    # print(user_info)
+    out_response = await account_user_crud.get_user_by_id(id, db_session)
+    return out_response
+
+
+
